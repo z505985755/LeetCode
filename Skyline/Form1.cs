@@ -19,6 +19,14 @@ namespace Skyline
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            List<int> list1 = new List<int>();
+            list1.Add(1);
+            list1.Add(2);
+            list1.Add(3);
+            List<int> list2 = new List<int>();
+            list2.Add(2);
+            list2.Add(3);
+            list1.RemoveAll(x => list2.Contains(x));
 
         }
         public List<Point> GetSkyline(int[,] buildings)
