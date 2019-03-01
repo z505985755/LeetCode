@@ -61,10 +61,6 @@ namespace Sudoku
                 }
             }
         }
-        private void CreatTextBox()
-        {
-
-        }
         private void InitializeComponent()
         {
             this.button1 = new System.Windows.Forms.Button();
@@ -181,7 +177,7 @@ namespace Sudoku
             }
             for (int i = 1; i < 10; i++)
             {
-                if(Check(x, y, i))
+                if (Check(x, y, i))
                 {
                     int x1 = x, y1 = y;
                     while (true)

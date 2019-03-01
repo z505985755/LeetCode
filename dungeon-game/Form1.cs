@@ -42,6 +42,7 @@ namespace dungeon_game
         {
             return Optimal(0, 0);
         }
+        //还可以用动态规划做进一步优化
         private int Optimal(int x, int y)
         {
             int xc = map.GetLength(0);
