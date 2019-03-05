@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RectangleArea2", "Rectangle
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BigInt", "BigInt\BigInt.csproj", "{C9C280C9-6848-48A8-8FC2-FD7BB4C62695}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkedListRandomNode", "LinkedListRandomNode\LinkedListRandomNode.csproj", "{5ACE26F1-CC25-4A90-8EB3-8A0103C387F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{C9C280C9-6848-48A8-8FC2-FD7BB4C62695}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9C280C9-6848-48A8-8FC2-FD7BB4C62695}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9C280C9-6848-48A8-8FC2-FD7BB4C62695}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5ACE26F1-CC25-4A90-8EB3-8A0103C387F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5ACE26F1-CC25-4A90-8EB3-8A0103C387F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5ACE26F1-CC25-4A90-8EB3-8A0103C387F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5ACE26F1-CC25-4A90-8EB3-8A0103C387F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
