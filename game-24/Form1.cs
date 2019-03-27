@@ -20,8 +20,8 @@ namespace game_24
         private void button2_Click(object sender, EventArgs e)
         {
             var v = textBox1.Text.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-            List<double> nums = new List<double>();
-            double result = Convert.ToInt32(textBox2.Text);
+            List<decimal> nums = new List<decimal>();
+            decimal result = Convert.ToInt32(textBox2.Text);
             foreach (var item in v)
             {
                 nums.Add(Convert.ToInt32(item));
@@ -34,7 +34,7 @@ namespace game_24
             textBox3.Text = str;
         }
 
-        private string Calculation(List<double> nums, double result)
+        private string Calculation(List<decimal> nums, decimal result)
         {
             if (nums.Count == 1)
             {
@@ -78,8 +78,8 @@ namespace game_24
             //1,3分
             for (int j = 0; j < nums.Count; j++)
             {
-                double d = nums[j];
-                List<double> nums1 = new List<double>(nums);
+                decimal d = nums[j];
+                List<decimal> nums1 = new List<decimal>(nums);
                 nums1.RemoveAt(j);
                 //  +
 
@@ -124,9 +124,9 @@ namespace game_24
                 {
                     if (j != i)
                     {
-                        double d1 = nums[j];
-                        double d2 = nums[i];
-                        List<double> nums1 = new List<double>(nums);
+                        decimal d1 = nums[j];
+                        decimal d2 = nums[i];
+                        List<decimal> nums1 = new List<decimal>(nums);
                         if (i > j)
                         {
                             nums1.RemoveAt(i);
@@ -137,7 +137,7 @@ namespace game_24
                             nums1.RemoveAt(j);
                             nums1.RemoveAt(i);
                         }
-                        double newresult = d1 + d2;
+                        decimal newresult = d1 + d2;
                         string str1 = "(" + d1 + "+" + d2 + ")";
                         string str = Calculation(nums1, result - newresult);
                         //  +
@@ -194,10 +194,13 @@ namespace game_24
                             return "(" + str + "-" + str1 + ")";
                         }
                         //  *
-                        str = Calculation(nums1, result / newresult);
-                        if (str != "")
+                        if (newresult != 0)
                         {
-                            return str1 + "*" + str;
+                            str = Calculation(nums1, result / newresult);
+                            if (str != "")
+                            {
+                                return str1 + "*" + str;
+                            }
                         }
                         //  
                         if (newresult != 0)
@@ -236,10 +239,13 @@ namespace game_24
                             return "(" + str + "-" + str1 + ")";
                         }
                         //  *
-                        str = Calculation(nums1, result / newresult);
-                        if (str != "")
+                        if (newresult != 0)
                         {
-                            return str1 + "*" + str;
+                            str = Calculation(nums1, result / newresult);
+                            if (str != "")
+                            {
+                                return str1 + "*" + str;
+                            }
                         }
                         //  
                         if (newresult != 0)

@@ -19,18 +19,13 @@ namespace RangeSumQueryMutable
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            int[] nums1 = new int[5];
-            List<int> nums2 = new List<int>();
-            long s1 = 0;
-            for (int i = 0; i < 5; i++)
+            int[] nums1 = new int[10];
+            for (int i = 0; i < 10; i++)
             {
-                s1 += i + 1;
-                nums1[i] = i + 1;
-                nums2.Add(i + 1);
+                nums1[i] = i;
             }
             NumArray numArray1 = new NumArray(nums1);
-            NumArray numArray2 = new NumArray(nums2);
-            numArray1.Update(0, 2);
+            //numArray1.Update(0, 2);
             int sum = numArray1.SumRange(1, 3);
         }
     }

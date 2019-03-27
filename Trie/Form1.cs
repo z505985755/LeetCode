@@ -86,7 +86,7 @@ namespace Trie
             {
                 if (str.Length == 1)
                 {
-                    node.IsValue = true;
+                    node[s1].IsValue = true;
                 }
                 else
                 {

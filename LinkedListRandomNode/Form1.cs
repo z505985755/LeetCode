@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -19,37 +20,22 @@ namespace LinkedListRandomNode
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            ListNode node = new ListNode()
+            ListNode headNode = new ListNode()
             {
-                Value = 1,
-                Next = new ListNode()
-                {
-                    Value = 2,
-                    Next = new ListNode()
-                    {
-                        Value = 3,
-                        Next = new ListNode()
-                        {
-                            Value = 4,
-                            Next = new ListNode()
-                            {
-                                Value = 5,
-                                Next = new ListNode()
-                                {
-                                    Value = 6,
-                                    Next = new ListNode()
-                                    {
-                                        Value = 7,
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+                Value = 0,
             };
-            Solution solution = new Solution(node);
+            ListNode node = headNode;
+            for (int i = 1; i < 10; i++)
+            {
+                node.Next = new ListNode()
+                {
+                    Value = i,
+                };
+                node = node.Next;
+            }
+            Solution solution = new Solution(headNode);
             List<int> vs = new List<int>();
-            for (int i = 0; i < 1000000; i++)
+            for (int i = 0; i < 1000; i++)
             {
                 var v = solution.GetRandom();
                 vs.Add(v);
@@ -59,6 +45,8 @@ namespace LinkedListRandomNode
             int i3 = vs.FindAll(x => x == 3).Count;
             int i4 = vs.FindAll(x => x == 4).Count;
             int i5 = vs.FindAll(x => x == 5).Count;
+            int i6 = vs.FindAll(x => x == 6).Count;
+            int i7 = vs.FindAll(x => x == 7).Count;
         }
     }
 
@@ -83,11 +71,19 @@ namespace LinkedListRandomNode
             while (node.Next != null)
             {
                 i++;
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
                 int j = new Random(Guid.NewGuid().GetHashCode()).Next(i);
+                stopwatch.Stop();
+                var v = stopwatch.ElapsedTicks;
+
+                stopwatch.Restart();
                 if (j < 1)
                 {
                     valueNode = node.Next;
                 }
+                stopwatch.Stop();
+                v = stopwatch.ElapsedTicks;
                 node = node.Next;
             }
             return valueNode.Value;
