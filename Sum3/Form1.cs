@@ -85,8 +85,16 @@ namespace Sum3
                     }
                 }
             }
-            
-            return list;
+            List<List<int>> list2 = new List<List<int>>();
+            foreach (var item in list)
+            {
+                item.Sort();
+                if (!list2.Exists(x => x[0] == item[0] && x[1] == item[1] && x[2] == item[2]))
+                {
+                    list2.Add(item);
+                }
+            }
+            return list2;
         }
     }
 }

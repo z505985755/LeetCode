@@ -19,9 +19,60 @@ namespace BigInt
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //给以解决LeetCode上大量数字类问题,无符号变为有符号也比较简单
-            BigInt bigInt1 = 1000000;
-            BigInt bigInt2 = bigInt1;
+            BigInt bigInt11 = 3;
+            BigInt bigInt21 = 2;
+            var v = bigInt11  % bigInt21;
+            //给以解决LeetCode上大量数字类问题
+            for (int i = 0; i < 1000; i++)
+            {
+                for (int j = 0; j < 1000; j++)
+                {
+                    BigInt bigInt1 = i-500;
+                    BigInt bigInt2 = j-500;
+                    int i1 = i-500;
+                    int i2 = j-500;
+                    if (i1.ToString() != bigInt1.ToString() || i2.ToString() != bigInt2.ToString())
+                    {
+
+                    }
+                    //System.IO.File.AppendAllText(@"D:\text.txt", i1 + "  " + i2 + "  " + bigInt1.ToString() + "  " + bigInt2.ToString() + "\r\n");
+                    BigInt v1;
+                    BigInt v2;
+                    v1 = bigInt1 + bigInt2;
+                    v2 = i1 + i2;
+                    if (v1.ToString() != v2.ToString())
+                    {
+
+                    }
+                    v1 = bigInt1 - bigInt2;
+                    v2 = i1 - i2;
+                    if (v1.ToString() != v2.ToString())
+                    {
+
+                    }
+                    v1 = bigInt1 * bigInt2;
+                    v2 = i1 * i2;
+                    if (v1.ToString() != v2.ToString())
+                    {
+
+                    }
+                    if (bigInt2 != 0)
+                    {
+                        v1 = bigInt1 / bigInt2;
+                        v2 = i1 / i2;
+                        if (v1.ToString() != v2.ToString())
+                        {
+
+                        }
+                        v1 = bigInt1 % bigInt2;
+                        v2 = i1 % i2;
+                        if (v1.ToString() != v2.ToString())
+                        {
+
+                        }
+                    }
+                }
+            }
         }
     }
     /// <summary>
@@ -81,8 +132,8 @@ namespace BigInt
         {
             if (BigInt1._fuhao == BigInt2._fuhao)
             {
-                BigInt bi1 = new BigInt(BigInt1);
-                BigInt bi2 = new BigInt(BigInt2);
+                BigInt bi1 = BigInt1.Abs;
+                BigInt bi2 = BigInt2.Abs;
                 byte b = 0;//表示进位
                 int length = Math.Max(bi1._number.Length, bi2._number.Length);
                 int length1 = bi1._number.Length;
@@ -144,22 +195,36 @@ namespace BigInt
             }
             else
             {
-                if (BigInt1._fuhao == "-")
+                BigInt bi1 = BigInt1.Abs;
+                BigInt bi2 = BigInt2.Abs;
+                BigInt bi3 = bi1 - bi2;
+                if (BigInt1._fuhao == "-" && bi1 > bi2)
                 {
-                    return BigInt2 - BigInt1;
+                    bi3._fuhao = "-";
                 }
-                else
+                if (BigInt1._fuhao == "-" && bi1 < bi2)
                 {
-                    return BigInt1 - BigInt2;
+                    bi3._fuhao = "";
+
                 }
+                if (BigInt1._fuhao == "" && bi1 > bi2)
+                {
+                    bi3._fuhao = "";
+                }
+                if (BigInt1._fuhao == "" && bi1 < bi2)
+                {
+                    bi3._fuhao = "-";
+
+                }
+                return bi3;
             }
         }
         public static BigInt operator -(BigInt BigInt1, BigInt BigInt2)//核心
         {
             if (BigInt1._fuhao != BigInt2._fuhao)
             {
-                BigInt bi1 = new BigInt(BigInt1);
-                BigInt bi2 = new BigInt(BigInt2);
+                BigInt bi1 = BigInt1.Abs;
+                BigInt bi2 = BigInt2.Abs;
                 BigInt bi3 = bi1 + bi2;
                 bi3._fuhao = BigInt1._fuhao;
                 return bi3;
@@ -170,11 +235,9 @@ namespace BigInt
                 {
                     return 0;
                 }
-                BigInt bi1 = new BigInt(BigInt1);
-                BigInt bi2 = new BigInt(BigInt2);
-                bi1._fuhao = "";
-                bi2._fuhao = "";
-                BigInt bi3 = new BigInt();
+                BigInt bi1 = BigInt1.Abs;
+                BigInt bi2 = BigInt2.Abs;
+                BigInt bi3 = 0;
                 if (BigInt1 < BigInt2)
                 {
                     bi3._fuhao = "-";
@@ -190,6 +253,7 @@ namespace BigInt
                             if (bi1._number[bi1._number.Length - i - 1] >= bi2._number[bi2._number.Length - i - 1] + b)
                             {
                                 bi3._number[bi1._number.Length - i - 1] = Convert.ToByte(bi1._number[bi1._number.Length - i - 1] - bi2._number[bi2._number.Length - i - 1] - b);
+                                b = 0;
                             }
                             else
                             {
@@ -202,6 +266,7 @@ namespace BigInt
                             if (bi1._number[bi1._number.Length - i - 1] >= b)
                             {
                                 bi3._number[bi1._number.Length - i - 1] = Convert.ToByte(bi1._number[bi1._number.Length - i - 1] - b);
+                                b = 0;
                             }
                             else
                             {
@@ -222,6 +287,7 @@ namespace BigInt
                             if (bi2._number[bi2._number.Length - i - 1] >= bi1._number[bi1._number.Length - i - 1] + b)
                             {
                                 bi3._number[bi2._number.Length - i - 1] = Convert.ToByte(bi2._number[bi2._number.Length - i - 1] - bi1._number[bi1._number.Length - i - 1] - b);
+                                b = 0;
                             }
                             else
                             {
@@ -234,6 +300,7 @@ namespace BigInt
                             if (bi2._number[bi2._number.Length - i - 1] >= b)
                             {
                                 bi3._number[bi2._number.Length - i - 1] = Convert.ToByte(bi2._number[bi2._number.Length - i - 1] - b);
+                                b = 0;
                             }
                             else
                             {
@@ -245,10 +312,28 @@ namespace BigInt
                 }
                 if (bi3._number[0] == 0)
                 {
-                    byte[] barr = new byte[bi3._number.Length - 1];
-                    for (int j = 0; j < bi3._number.Length - 1; j++)
+                    byte[] barr =new byte[] { };
+                    int L = 0;
+                    bool tag = true;
+                    for (int i = 0; i < bi3._number.Length; i++)
                     {
-                        barr[j] = bi3._number[j + 1];
+                        if (bi3._number[i]==0 && tag)
+                        {
+                            L++;
+                        }
+                        else
+                        {
+                            if (tag)
+                            {
+                                barr = new byte[bi3._number.Length - L];
+                                tag = false;
+                                barr[i - L] = bi3._number[i];
+                            }
+                            else
+                            {
+                                barr[i - L] = bi3._number[i];
+                            }
+                        }
                     }
                     bi3._number = barr;
                 }
@@ -257,10 +342,16 @@ namespace BigInt
         }
         public static BigInt operator *(BigInt BigInt1, BigInt BigInt2)
         {
-            BigInt bi3 = 0;
-            for (BigInt i = 0; i < BigInt2; i++)
+            if (BigInt1 == 0 || BigInt2 == 0)
             {
-                bi3 = bi3 + BigInt1;
+                return 0;
+            }
+            BigInt bi3 = 0;
+            BigInt bi1 = BigInt1.Abs;
+            BigInt bi2 = BigInt2.Abs;
+            for (BigInt i = 0; i < bi2; i++)
+            {
+                bi3 = bi3 + bi1;
             }
             if (BigInt1._fuhao == BigInt2._fuhao)
             {
@@ -274,17 +365,30 @@ namespace BigInt
         }
         public static BigInt operator /(BigInt BigInt1, BigInt BigInt2)
         {
-            BigInt bigInt1 = new BigInt(BigInt1);
-            BigInt bigInt2 = new BigInt(BigInt2);
-            bigInt1._fuhao = "";
-            bigInt2._fuhao = "";
+            if (BigInt2 == 0)
+            {
+                throw new DivideByZeroException("尝试除以零。");
+            }
+            BigInt bigInt1 = BigInt1.Abs;
+            BigInt bigInt2 = BigInt2.Abs;
+            BigInt bigInt3 = 0;
             if (bigInt1 >= bigInt2)
             {
                 for (BigInt i = 1; i <= bigInt1; i++)
                 {
-                    if (i * bigInt2 == bigInt1 || (i + 1) * bigInt2 > bigInt1)
+                    bigInt3 += bigInt2;
+                    if (bigInt3 == bigInt1)
                     {
-                        if (BigInt1._fuhao!= BigInt2._fuhao)
+                        if (BigInt1._fuhao != BigInt2._fuhao)
+                        {
+                            i._fuhao = "-";
+                        }
+                        return i;
+                    }
+                    if (bigInt3 > bigInt1)
+                    {
+                        i--;
+                        if (BigInt1._fuhao != BigInt2._fuhao)
                         {
                             i._fuhao = "-";
                         }
@@ -297,10 +401,44 @@ namespace BigInt
             {
                 return 0;
             }
+
+            //if (BigInt2==0)
+            //{
+            //    throw new DivideByZeroException("尝试除以零。");
+            //}
+            //BigInt bigInt1 = new BigInt(BigInt1);
+            //BigInt bigInt2 = new BigInt(BigInt2);
+            //bigInt1._fuhao = "";
+            //bigInt2._fuhao = "";
+            //if (bigInt1 >= bigInt2)
+            //{
+            //    for (BigInt i = 1; i <= bigInt1; i++)
+            //    {
+            //        if (i * bigInt2 == bigInt1 || (i + 1) * bigInt2 > bigInt1)
+            //        {
+            //            if (BigInt1._fuhao!= BigInt2._fuhao)
+            //            {
+            //                i._fuhao = "-";
+            //            }
+            //            return i;
+            //        }
+            //    }
+            //    return 0;
+            //}
+            //else
+            //{
+            //    return 0;
+            //}
         }
         public static BigInt operator %(BigInt BigInt1, BigInt BigInt2)
         {
-            return BigInt1 - BigInt1 / BigInt2;
+            if (BigInt2 == 0)
+            {
+                throw new DivideByZeroException("尝试除以零。");
+            }
+            var v = BigInt1 / BigInt2;
+            v = v * BigInt2;
+            return BigInt1 - v;
         }
         public static BigInt operator ++(BigInt BigInt1)
         {
@@ -309,8 +447,7 @@ namespace BigInt
         }
         public static BigInt operator --(BigInt BigInt1)
         {
-            BigInt bi1 = new BigInt(BigInt1);
-            return bi1 - new BigInt(1);
+            return BigInt1 - 1;
         }
         public static bool operator <(BigInt bi1, BigInt bi2)
         {
@@ -438,6 +575,16 @@ namespace BigInt
         public static implicit operator BigInt(string s)
         {
             return new BigInt(s);
+        }
+
+        public BigInt Abs
+        {
+            get
+            {
+                BigInt b = new BigInt(this);
+                b._fuhao = "";
+                return b;
+            }
         }
     }
 }
