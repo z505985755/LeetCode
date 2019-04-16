@@ -19,11 +19,11 @@ namespace RangeSumQueryMutable
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            int[] nums1 = new int[10];
-            for (int i = 0; i < 10; i++)
-            {
-                nums1[i] = i;
-            }
+            int[] nums1 = new int[0];
+            //for (int i = 0; i < 10; i++)
+            //{
+            //    nums1[i] = i;
+            //}
             NumArray numArray1 = new NumArray(nums1);
             //numArray1.Update(0, 2);
             int sum = numArray1.SumRange(1, 3);
@@ -35,10 +35,14 @@ namespace RangeSumQueryMutable
 
         public NumArray(int[] nums)
         {
+            if (nums.Length == 0)
+            {
+                return;
+            }
             RootNode = new Node();
             RootNode = CreateNode(nums.ToList(), 0, nums.Length - 1);
         }
-        public NumArray(List<int> nums)
+        private NumArray(List<int> nums)
         {
             RootNode = new Node();
             RootNode = CreateNode(nums, 0, nums.Count - 1);
@@ -52,8 +56,8 @@ namespace RangeSumQueryMutable
             if (nums.Count != 1)
             {
                 int sp = (int)Math.Ceiling(nums.Count / 2d) - 1;
-                List<int> nums1 = nums.FindAll(x => nums.IndexOf(x) <= sp);
-                List<int> nums2 = nums.FindAll(x => nums.IndexOf(x) > sp);
+                List<int> nums1 = nums.GetRange(0, sp + 1);
+                List<int> nums2 = nums.GetRange(sp + 1, nums.Count - sp - 1);
                 node.LeftNode = CreateNode(nums1, leftKey, leftKey + sp);
                 node.RightNode = CreateNode(nums2, leftKey + sp + 1, rightKey);
                 node.Value = node.LeftNode.Value + node.RightNode.Value;

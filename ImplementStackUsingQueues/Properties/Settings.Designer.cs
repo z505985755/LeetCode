@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CatAndMouse.Properties
+namespace ImplementStackUsingQueues.Properties
 {
 
 

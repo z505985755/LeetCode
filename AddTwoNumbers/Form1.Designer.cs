@@ -1,4 +1,4 @@
-﻿namespace PredictTheWinner
+﻿namespace AddTwoNumbers
 {
     partial class Form1
     {

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PredictTheWinner.Properties
+namespace AddTwoNumbers.Properties
 {
 
 

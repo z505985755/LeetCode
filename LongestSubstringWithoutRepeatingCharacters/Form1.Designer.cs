@@ -1,4 +1,4 @@
-﻿namespace CatAndMouse
+﻿namespace LongestSubstringWithoutRepeatingCharacters
 {
     partial class Form1
     {

@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5B51C113-EDEB-479C-8743-8D0C2CF22A5F}</ProjectGuid>
+    <ProjectGuid>{224A01BE-93DF-4E07-BDC5-FDBD79BCDB21}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>CatAndMouse</RootNamespace>
-    <AssemblyName>CatAndMouse</AssemblyName>
+    <RootNamespace>AddTwoNumbers</RootNamespace>
+    <AssemblyName>AddTwoNumbers</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

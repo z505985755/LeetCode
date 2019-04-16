@@ -19,59 +19,21 @@ namespace BigInt
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            BigInt bigInt11 = 3;
-            BigInt bigInt21 = 2;
-            var v = bigInt11  % bigInt21;
-            //给以解决LeetCode上大量数字类问题
-            for (int i = 0; i < 1000; i++)
+            BigInt b1 = dividend;
+            BigInt b2 = divisor;
+            BigInt b3 = b1 / b2;
+            if (b3 > 2147483647 || b3 < -2147483648)
             {
-                for (int j = 0; j < 1000; j++)
-                {
-                    BigInt bigInt1 = i-500;
-                    BigInt bigInt2 = j-500;
-                    int i1 = i-500;
-                    int i2 = j-500;
-                    if (i1.ToString() != bigInt1.ToString() || i2.ToString() != bigInt2.ToString())
-                    {
+                b3 = -2147483648;
+            }
+            return Convert.ToInt32(b3.ToString());
 
-                    }
-                    //System.IO.File.AppendAllText(@"D:\text.txt", i1 + "  " + i2 + "  " + bigInt1.ToString() + "  " + bigInt2.ToString() + "\r\n");
-                    BigInt v1;
-                    BigInt v2;
-                    v1 = bigInt1 + bigInt2;
-                    v2 = i1 + i2;
-                    if (v1.ToString() != v2.ToString())
-                    {
-
-                    }
-                    v1 = bigInt1 - bigInt2;
-                    v2 = i1 - i2;
-                    if (v1.ToString() != v2.ToString())
-                    {
-
-                    }
-                    v1 = bigInt1 * bigInt2;
-                    v2 = i1 * i2;
-                    if (v1.ToString() != v2.ToString())
-                    {
-
-                    }
-                    if (bigInt2 != 0)
-                    {
-                        v1 = bigInt1 / bigInt2;
-                        v2 = i1 / i2;
-                        if (v1.ToString() != v2.ToString())
-                        {
-
-                        }
-                        v1 = bigInt1 % bigInt2;
-                        v2 = i1 % i2;
-                        if (v1.ToString() != v2.ToString())
-                        {
-
-                        }
-                    }
-                }
+            BigInt bigInt1 = 1;
+            
+            //给以解决LeetCode上大量数字类问题
+            for (int i = 1; i < 10000; i++)
+            {
+                bigInt1 *= 2;
             }
         }
     }
@@ -127,6 +89,69 @@ namespace BigInt
             _number = new byte[initial._number.Length];
             _number = (byte[])initial._number.Clone();
             _fuhao = initial._fuhao;
+        }
+        private static BigInt Division(BigInt L, BigInt R, BigInt BigInt1, BigInt BigInt2)
+        {
+            if (L == R)
+            {
+                return L;
+            }
+            if (L + 1 == R)
+            {
+                if (R * BigInt2 <= BigInt1)
+                {
+                    return R;
+                }
+                else
+                {
+                    return L;
+                }
+            }
+            BigInt center = GetCenter(L, R);//L和R的中间数
+            BigInt r = center * BigInt2;
+            if (r == BigInt1)
+            {
+                return center;
+            }
+            if (r > BigInt1)
+            {
+                return Division(L, center, BigInt1, BigInt2);
+            }
+            if (r < BigInt1)
+            {
+                return Division(center, R, BigInt1, BigInt2);
+            }
+            return 0;
+        }
+        private static BigInt GetCenter(BigInt L, BigInt R)
+        {
+            BigInt temp = R - L;
+            int t = 0;
+            StringBuilder sb = new StringBuilder();
+            bool tag = false;
+            for (int i = 0; i < temp._number.Length; i++)
+            {
+                var v1 = (temp._number[i] + 10 * t) / 2;
+                var v2 = (temp._number[i] + 10 * t) % 2;
+                if (v1 == 0)
+                {
+                    if (tag)
+                    {
+                        sb.Append(v1);
+                    }
+                }
+                else
+                {
+                    sb.Append(v1);
+                    tag = true;
+                }
+                t = v2;
+            }
+            if (sb.ToString()=="")
+            {
+
+            }
+            return L + sb.ToString();
         }
         public static BigInt operator +(BigInt BigInt1, BigInt BigInt2)//核心
         {
@@ -349,9 +374,24 @@ namespace BigInt
             BigInt bi3 = 0;
             BigInt bi1 = BigInt1.Abs;
             BigInt bi2 = BigInt2.Abs;
-            for (BigInt i = 0; i < bi2; i++)
+            for (int i = 0; i < bi2._number.Length; i++)
             {
-                bi3 = bi3 + bi1;
+                StringBuilder sb = new StringBuilder();
+                int t = 0;
+                for (int k = 0; k < bi1._number.Length; k++)
+                {
+                    int r = bi2._number[bi2._number.Length - i - 1] * bi1._number[bi1._number.Length - k - 1] + t;
+                    sb.Append((r % 10).ToString());
+                    t = r / 10;
+                }
+                if (t > 0)
+                {
+                    sb.Append(t);
+                }
+                string str = sb.ToString();
+                str = string.Join("", str.Reverse());
+                str = str.PadRight(i + str.Length, '0');
+                bi3 += str.ToString();
             }
             if (BigInt1._fuhao == BigInt2._fuhao)
             {
@@ -374,61 +414,25 @@ namespace BigInt
             BigInt bigInt3 = 0;
             if (bigInt1 >= bigInt2)
             {
-                for (BigInt i = 1; i <= bigInt1; i++)
+                if (bigInt1 == bigInt2)
                 {
-                    bigInt3 += bigInt2;
-                    if (bigInt3 == bigInt1)
-                    {
-                        if (BigInt1._fuhao != BigInt2._fuhao)
-                        {
-                            i._fuhao = "-";
-                        }
-                        return i;
-                    }
-                    if (bigInt3 > bigInt1)
-                    {
-                        i--;
-                        if (BigInt1._fuhao != BigInt2._fuhao)
-                        {
-                            i._fuhao = "-";
-                        }
-                        return i;
-                    }
+                    bigInt3 = 1;
                 }
-                return 0;
+                if (1 == bigInt2)
+                {
+                    bigInt3 = BigInt1;
+                }
+                bigInt3 = Division(1, bigInt1, bigInt1, bigInt2);//通过二分法寻找商
+                if (BigInt1._fuhao != BigInt2._fuhao)
+                {
+                    bigInt3._fuhao = "-";
+                }
+                return bigInt3;
             }
             else
             {
                 return 0;
             }
-
-            //if (BigInt2==0)
-            //{
-            //    throw new DivideByZeroException("尝试除以零。");
-            //}
-            //BigInt bigInt1 = new BigInt(BigInt1);
-            //BigInt bigInt2 = new BigInt(BigInt2);
-            //bigInt1._fuhao = "";
-            //bigInt2._fuhao = "";
-            //if (bigInt1 >= bigInt2)
-            //{
-            //    for (BigInt i = 1; i <= bigInt1; i++)
-            //    {
-            //        if (i * bigInt2 == bigInt1 || (i + 1) * bigInt2 > bigInt1)
-            //        {
-            //            if (BigInt1._fuhao!= BigInt2._fuhao)
-            //            {
-            //                i._fuhao = "-";
-            //            }
-            //            return i;
-            //        }
-            //    }
-            //    return 0;
-            //}
-            //else
-            //{
-            //    return 0;
-            //}
         }
         public static BigInt operator %(BigInt BigInt1, BigInt BigInt2)
         {
@@ -436,9 +440,7 @@ namespace BigInt
             {
                 throw new DivideByZeroException("尝试除以零。");
             }
-            var v = BigInt1 / BigInt2;
-            v = v * BigInt2;
-            return BigInt1 - v;
+            return BigInt1 - BigInt1 / BigInt2 * BigInt2;
         }
         public static BigInt operator ++(BigInt BigInt1)
         {

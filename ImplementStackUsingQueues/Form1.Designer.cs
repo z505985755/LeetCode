@@ -1,4 +1,4 @@
-﻿namespace Skyline
+﻿namespace ImplementStackUsingQueues
 {
     partial class Form1
     {

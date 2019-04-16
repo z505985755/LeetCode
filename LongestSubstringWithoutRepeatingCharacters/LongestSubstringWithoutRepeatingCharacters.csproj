@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{18076258-EC32-4FBE-84A5-7A9780C307EC}</ProjectGuid>
+    <ProjectGuid>{B964A797-83EF-4BC8-8340-84A4C3ECDA13}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Skyline</RootNamespace>
-    <AssemblyName>Skyline</AssemblyName>
+    <RootNamespace>LongestSubstringWithoutRepeatingCharacters</RootNamespace>
+    <AssemblyName>LongestSubstringWithoutRepeatingCharacters</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

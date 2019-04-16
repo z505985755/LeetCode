@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Skyline.Properties
+namespace LongestSubstringWithoutRepeatingCharacters.Properties
 {
 
 

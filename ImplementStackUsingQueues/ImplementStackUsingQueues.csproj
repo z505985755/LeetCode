@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4E2E8CD6-9DE2-4A03-BC78-D8F3A8685794}</ProjectGuid>
+    <ProjectGuid>{4C49B12D-BB37-4B0E-83BA-504CEF29E5DF}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>PredictTheWinner</RootNamespace>
-    <AssemblyName>PredictTheWinner</AssemblyName>
+    <RootNamespace>ImplementStackUsingQueues</RootNamespace>
+    <AssemblyName>ImplementStackUsingQueues</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
